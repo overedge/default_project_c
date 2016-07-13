@@ -21,6 +21,6 @@ int		main(void)
 		free(line);
 	}
 	if (i == -1)
-		ft_exit("get_next_line failed");
+		ft_exit("get_next_line faileds");
 	return (0);
 }

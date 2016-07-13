@@ -1,8 +1,8 @@
 #ifndef HEADER_H
 # define HEADER_H
 
-#include "libft/includes/libft.h"
-#include "mlx/mlx.h"
+#include "../libft/includes/libft.h"
+#include "../mlx/mlx.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>

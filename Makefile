@@ -1,34 +1,69 @@
-SRC_NAME = main.c
+NAME = wolfd3d
+CC = gcc
+INC_DIR = include/
+OBJ_DIR = .objects/
+OBJS = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
+LIBPATH = libft
+LIB = $(LIBPATH)/libft.a
+LDFLAGS = -L libft -lft
+VPATH = srcs:srcs/base
 
-NAME = wolf3d
+ifdef FLAGS
+	ifeq ($(FLAGS), no)
+		CFLAGS=
+	endif
+	ifeq ($(FLAGS), debug)
+		CFLAGS= -Wall -Wextra -Werror -g
+	endif
+else
+	CFLAGS = -Wall -Wextra -Werror
+endif
 
-OBJ_NAME = $(SRC_NAME:.c=.o)
+SRC =  test.c \
 
-all : $(NAME)
+MAIN = srcs/main.c
 
-$(NAME) :
-	@make fclean -C libft/ && make -C libft/ 
-	@make -C mlx/ clean && make -C mlx/
-	@cp libft/libft.a .
-	@cp mlx/libmlx.a .
-	@gcc -c -Wall -Werror -Wextra $(SRC_NAME)
-	@gcc $(OBJ_NAME) -o $(NAME) -L. -lft -lmlx -framework OpenGL -framework AppKit
-	@echo "\033[1;34m --WOLF3D-- :\033[m \033[1;32m DONE !\033[m"
+.PHONY: all clean fclean re
 
+default: all
 
-clean :
-	@rm -rf $(OBJ_NAME)
-	@rm -rf libft.a
-	@make clean -C libft/
-	@make clean -C mlx/
-	@echo "\033[1;34m --WOLF3D-- :\033[m \033[1;32m DELETE OBJ FILES !\033[m"
-	@rm -rf libmlx.a
+all: $(LIB) $(NAME)
+	@echo " # sh : Job done $(shell pwd)/$(NAME)"
 
-fclean : clean
-	@rm -rf $(NAME)
-	@make fclean -C libft/
-	@echo "\033[1;34m --WOLF3D-- :\033[m \033[1;32m DELETE project !\033[m"
+$(NAME): $(OBJ_DIR) $(OBJS)
+	@$(CC) $(CFLAGS) $(MAIN) $(OBJS) $(LDFLAGS) -I libft/include/ -I $(INC_DIR) -o $(NAME)
 
-re : fclean all
+$(LIB):
+	@make -C $(LIBPATH)
 
-.PHONY : all re clean fclean $(NAME)
+clean:
+	@make -C libft/ clean -s
+	@echo " $(shell\
+		if [ -d $(OBJ_DIR) ]; then\
+			echo "- sh : Removing $(OBJ_DIR) with";\
+			ls $(OBJ_DIR) | wc -w; echo "*.o";\
+			rm -Rf $(OBJ_DIR);\
+		else\
+			echo "# sh : Nothing to clean";\
+		fi)"
+
+fclean: clean
+	@make -C libft/ fclean -s
+	@echo " $(shell\
+		if [ -f $(NAME) ]; then\
+			echo "- sh : Removing $ $(NAME) ";\
+			rm -f $(NAME);\
+		else\
+			echo "# sh : Nothing to fclean";\
+		fi)"
+
+re: fclean all
+
+$(addprefix $(OBJ_DIR), %.o): $(addprefix $(SRC_DIR), %.c)
+	@echo " + sh : Compiling $(OBJ_DIR) < $^"
+	@$(CC) $(CFLAGS) -I $(INC_DIR) -I libft/includes -o $@ -c $<
+
+$(OBJ_DIR):
+	@echo " + sh : Creating $(OBJ_DIR)"
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/base
