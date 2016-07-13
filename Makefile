@@ -1,4 +1,4 @@
-NAME = wolfd3d
+NAME = HELLOWORD
 CC = gcc
 INC_DIR = include/
 OBJ_DIR = .objects/
