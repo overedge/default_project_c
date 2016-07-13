@@ -6,7 +6,7 @@
 /*   By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:45:30 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/07/12 22:58:13 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/07/13 17:15:49 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@
 ** Increase It ! For Big File !
 */
 # define BUFF_SIZE 4096
-# define ft_clearscreen() ft_printf("\033[H\033[2J")
-
-/*
- * ** Maximum Of File Descriptor For
- * ** GET_NEXT_LINE
- * */
 # define MAX_FD 256
 
 typedef struct	s_list

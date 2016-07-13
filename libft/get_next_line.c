@@ -1,5 +1,17 @@
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/27 16:20:44 by nahmed-m          #+#    #+#             */
+/*   Updated: 2016/07/13 17:23:17 by nahmed-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
+#include <unistd.h>
 
 static int	get_line(int const fd, char *buffer, char *save[fd])
 {
@@ -8,7 +20,7 @@ static int	get_line(int const fd, char *buffer, char *save[fd])
 	char			*tmp;
 
 	while ((c = ft_strchr(buffer, '\n')) == NULL &&
-			(ret = read(fd, buffer, BUFF_SIZE)) > 0)
+				(ret = read(fd, buffer, BUFF_SIZE)) > 0)
 	{
 		buffer[ret] = '\0';
 		tmp = save[fd];

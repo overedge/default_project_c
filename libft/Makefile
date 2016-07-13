@@ -6,7 +6,7 @@
 #    By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/24 12:13:50 by nahmed-m          #+#    #+#              #
-#    Updated: 2016/02/03 21:20:51 by nahmed-m         ###   ########.fr        #
+#    Updated: 2016/07/13 17:27:23 by nahmed-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,4 +47,4 @@ fclean : clean
 	@make clean -C ft_printf
 re : fclean all
 
-.PHONY : all clean fclean re
+.PHONY: all clean fclean re $(NAME)
